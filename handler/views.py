@@ -77,21 +77,7 @@ def send_tg_voice(chat_id, text):
     g = requests.post('https://api.telegram.org/bot'+token_telegram+ "/sendVoice", params=payload, files=file1)
 
 actions_story={
-    "get_post_index":get_post_index,
-    "courier_request":courier_request,
-    "track_info":track_info,
-    "get_commision":get_commision,
-    "sent_hmail":sent_hmail,
-    "delivered_hmail":delivered_hmail,
-    "penalties_pdd":penalties_pdd,
-    "mobile":mobile,
-    "onay":onay,
-    "hmail_order":hmail_order,
-    "find_dep": find_dep,
-    "find_postamat": find_postamat,
-    "find_supermarket": find_supermarket,
-    "cancel_booking": cancel_booking,
-    "book_dep": book_dep
+
 }
 
 
