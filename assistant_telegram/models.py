@@ -60,6 +60,7 @@ class Undefined_msg(models.Model):
 		return str(self.msg)
 
 class Log_msg(models.Model):
-	msg=models.CharField(max_length=200)
+	msg=models.TextField(max_length=200, default=" ")
+	intent=models.CharField(max_length=200,default=" ")
 	def __str__(self):
 		return str(self.msg)
