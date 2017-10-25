@@ -37,9 +37,6 @@ def handler_commands(data):
 def start(chat_id, text):
     send_tg_message(chat_id,text)
     send_tg_voice(chat_id, text)
-    send_tg_message(chat_id,"Можете перейти по ссылке для авторизации")
-    send_tg_voice(chat_id, "Можете перейти по ссылке для авторизации")
-    create_session(chat_id)
     return HttpResponse(status=200)
 def help(chat_id, text):
     send_tg_message(chat_id,text)
@@ -57,12 +54,6 @@ def send_tg_message(chat_id, text):
     r = requests.get('http://api.telegram.org/bot'+token_telegram+'/sendMessage', params={'chat_id':chat_id, 'text':text})
     return r.text
 def send_tg_voice(chat_id, text):
-    text = text.replace('г.', 'города')
-    text = text.replace('ул.', 'улица')
-    text = text.replace('д.', 'дом')
-    # tts = gTTS(text=text, lang='ru', slow=False)
-    # tts.save("rspns.mp3")
-    # file = {'voice': open('rspns.mp3', 'rb')}
     payload={'key':'6e796575-7aef-4cf0-a227-ad4b55370a59',
         'text': text,
         'format':"mp3",
