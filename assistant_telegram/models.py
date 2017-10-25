@@ -31,7 +31,6 @@ class Story(models.Model):
 	story_type_choices = (
         (msg, 'message'),
         (act, 'action'),
-
     )
 
 	story_type=models.CharField(max_length=10,choices=story_type_choices,default=msg)
@@ -56,6 +55,11 @@ class Story_entity(models.Model):
 
 
 class Undefined_msg(models.Model):
+	msg=models.CharField(max_length=200)
+	def __str__(self):
+		return str(self.msg)
+
+class Log_msg(models.Model):
 	msg=models.CharField(max_length=200)
 	def __str__(self):
 		return str(self.msg)
