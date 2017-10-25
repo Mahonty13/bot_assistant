@@ -16,7 +16,7 @@ class Context_chat(models.Model):
 		return str1
 
 class Entity(models.Model):
-	name=models.CharField(max_length=60)
+	name=models.CharField(max_length=61)
 	value=models.CharField(max_length=60)
 	confidence=models.FloatField()
 	chat = models.ForeignKey(Context_chat, on_delete=models.CASCADE)
