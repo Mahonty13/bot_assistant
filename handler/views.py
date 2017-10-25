@@ -9,7 +9,7 @@ import requests
 from assistant_telegram.views import assistant_body
 
 # Create your views here.
-token_telegram ='448161033:AAEe34t8LtIRhIoPQJhkdQFsMt9tKUTi95A'
+token_telegram ='465116134:AAEBZ9TEMk1b2kx8uySx-GZllAcHIy5I4js'
 client = Wit('TCLMX5YEBCRG5TO2TLW3VJCOGFOWMOJW')
 
 def handler_commands(data):
