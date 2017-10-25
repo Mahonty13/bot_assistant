@@ -33,6 +33,8 @@ def assistant_body(chat_id,message):
         if 'intent' in msg_entities:
             if msg_entities['intent']['confidence']>0.8:
                 intent = msg_entities['intent']['value']
+                logmsg=Log_msg(msg=message,intent=intent)
+                logmsg.save()
         else:
             und_msg=Undefined_msg(msg=message)
             und_msg.save()
@@ -51,6 +53,8 @@ def assistant_body(chat_id,message):
         	#Если есть новый интент, то удаляем context и начинаем обрабатывать новый запрос
             if msg_entities['intent']['confidence']>0.8:
                 intent=msg_entities['intent']['value']
+                logmsg=Log_msg(msg=message,intent=intent)
+                logmsg.save()
                 current_chat=Context_chat.objects.get(chat_id=chat_id)
                 current_chat.delete()
                 #Если интента нет в Stories, то сохраняем его в undefined_msg, и делаем его general
