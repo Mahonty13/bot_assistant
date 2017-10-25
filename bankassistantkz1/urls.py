@@ -15,7 +15,19 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from assistant_telegram.views import story_response
+from assistant_telegram.views import save_story_json
+from assistant_telegram.views import get_undef_msgs
+from assistant_telegram.views import delete_story
+from assistant_telegram.views import save_first_story
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^assistant_telegram/get_story/$', story_response),
+    url(r'^assistant_telegram/save_story_json/', save_story_json),
+    url(r'^assistant_telegram/get_undef_msgs/', get_undef_msgs),
+    url(r'^assistant_telegram/delete_story/(?P<intent>.+)/$', delete_story),
+    url(r'^assistant_telegram/save_first_story/$', save_first_story),
+
 ]
