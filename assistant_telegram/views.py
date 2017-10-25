@@ -232,7 +232,8 @@ def save_story_json(request):
                     answer=story[intent]['entities'][0]['answer']
                     name=story[intent]['entities'][0]['name']
                     desc=story[intent]['entities'][0]['desc']
-                    new_story=Story(intent=intent,story_type=Story.act,action_name=action_name,answer=answer,name=name,desc=desc)
+                    validation_option=story[intent]['entities'][0]['validation_option']
+                    new_story=Story(intent=intent,story_type=Story.act,action_name=action_name,answer=answer,name=name,desc=desc,validation_option=validation_option)
                     new_story.save()
                     current_story=Story.objects.get(intent=intent)
                     no_entity_in_story=True
