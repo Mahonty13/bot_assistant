@@ -3,3 +3,4 @@ dj-static==0.0.6
 Django==1.11.4
 python-decouple==3.1
 djangorestframework==3.6.4
+wit==4.3.0
