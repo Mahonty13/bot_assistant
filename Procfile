@@ -1,0 +1,1 @@
+web: gunicorn bankassistantkz1.wsgi --log-file -
