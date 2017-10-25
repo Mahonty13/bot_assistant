@@ -133,7 +133,7 @@ def assistant_body(chat_id,message):
         else:
             if command.story_type==Story.act:
                 #if user validated request
-                if current_chat.validated_action==True:
+                if current_chat.validated_action==True and command.validation_option:
                     current_chat=Context_chat.objects.get(chat_id=chat_id)
                     entities ={}
                     for entity in current_chat.entity_set.all():
@@ -142,7 +142,7 @@ def assistant_body(chat_id,message):
                     return {"action": command.action_name,"answer":command.answer,"entities":entities}
                 else:
                     #if user has not validated request yet
-                    if current_chat.validated_action==False:
+                    if current_chat.validated_action==False and command.validation_option:
                         #create context entities list with entity values for parameters
                         context_entities_list=[]
                         for entity in current_chat.entity_set.all():

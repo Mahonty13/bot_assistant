@@ -35,6 +35,7 @@ class Story(models.Model):
     )
 
 	story_type=models.CharField(max_length=10,choices=story_type_choices,default=msg)
+	validation_option=models.BooleanField(default="False")
 	message=models.TextField(default=" ")
 	action_name=models.CharField(max_length=60,default=" ")
 	answer=models.TextField(default=" ")
