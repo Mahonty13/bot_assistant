@@ -50,6 +50,7 @@ def assistant_body(chat_id,date_in_s,message):
         new_chat = Context_chat(chat_id= current_chat_id, intent = current_intent, validated_action = False,prev_msg_from_bot=" ")
         new_chat.save()
     else:
+    	current_chat=current_chat_id.context_chat
         if 'intent' in msg_entities:
             #Если есть новый интент, то удаляем context и начинаем обрабатывать новый запрос
             if msg_entities['intent']['confidence']>0.8:
