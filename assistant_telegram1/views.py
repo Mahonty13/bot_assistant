@@ -152,10 +152,11 @@ def assistant_body(chat_id,date_in_s,message):
                         current_chat.save()
                         return {"text": answer}
                 else:
-                #In case of an apocalypse
-                    print("Команды не найдено")
+                    entities ={}
+                    for entity in current_chat.entity_set.all():
+                        entities[entity.name]=entity.value
                     current_chat.delete()
-                    return {"text": "Команды не найдено"}                
+                    return {"action": current_chat.intent.story_action.action_name,"answer":current_chat.intent.story_action.action_answer,"entities":entities}          
             else:
         	#if something is missing
                 for ent in necessary_story_entities:
