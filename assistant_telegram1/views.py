@@ -7,7 +7,7 @@ import json
 import requests
 from assistant_telegram1.models import *
 
-client = Wit('TCLMX5YEBCRG5TO2TLW3VJCOGFOWMOJW')
+client = Wit('OHNOVUONWOIA3NPRI2ER4CNMDBAWAJBX')
 
 @csrf_exempt
 def assistant_body(chat_id,date_in_s,message):
