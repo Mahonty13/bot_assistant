@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import permission_required, login_required
 from wit import Wit
 import json
 import requests
-from assistant_telegram.views import assistant_body
+from assistant_telegram1.views import assistant_body
 
 # Create your views here.
 token_telegram ='465116134:AAEBZ9TEMk1b2kx8uySx-GZllAcHIy5I4js'
