@@ -23,35 +23,39 @@ class Entity(models.Model):
 	def __str__(self):
 		return str(self.name)+" "+str(self.value)+" " + str(self.confidence)+" "+str(self.chat.chat_id)
 
-class Story(models.Model):
+class Story_msg(models.Model):
 	intent=models.CharField(primary_key=True,max_length=60)
-
-	msg="msg"
-	act="action"
-	story_type_choices = (
-        (msg, 'message'),
-        (act, 'action'),
-    )
-
-	story_type=models.CharField(max_length=10,choices=story_type_choices,default=msg)
-	validation_option=models.BooleanField(default="False")
-	message=models.TextField(default=" ")
-	action_name=models.CharField(max_length=60,default=" ")
-	answer=models.TextField(default=" ")
-	name=models.CharField(max_length=60,default=" ")
-	desc=models.CharField(max_length=160,default=" ")
+	msg_example=models.TextField(default=" ")
+	anwer=models.TextField(default=" ")
 
 	def __str__(self):
-		str1=''
-		str1=str(self.intent)+": " + str(self.story_type)
+		str1=str(self.intent)+": " + str(self.answer)
+		return str1
+
+class Story_action(models.Model):
+	intent=models.CharField(primary_key=True,max_length=60)
+	validation_option=models.BooleanField(default="False")
+	action_name=models.CharField(max_length=60,default=" ")
+	action_answer=models.TextField(default=" ")
+	transcript=models.CharField(max_length=60,default=" ")
+	desc=models.TextField(default=" ")
+
+	def __str__(self):
+		str1=str(self.intent)+": " + str(self.action_name)
 		return str1
 
 class Story_entity(models.Model):
 	name=models.CharField(max_length=60)
 	question=models.CharField(max_length=100)
-	intent = models.ForeignKey(Story, on_delete=models.CASCADE)
+	intent = models.ForeignKey(Story_action, on_delete=models.CASCADE)
 	def __str__(self):
 		return str(self.name)+" "+str(self.question)+" " + str(self.intent)
+
+class Log(models.Model):
+	msg=models.TextField(max_length=200, default=" ")
+	intent=models.CharField(max_length=200,default=" ")
+	def __str__(self):
+		return str(self.msg)
 
 
 class Undefined_msg(models.Model):
@@ -59,8 +63,3 @@ class Undefined_msg(models.Model):
 	def __str__(self):
 		return str(self.msg)
 
-class Log_msg(models.Model):
-	msg=models.TextField(max_length=200, default=" ")
-	intent=models.CharField(max_length=200,default=" ")
-	def __str__(self):
-		return str(self.msg)
