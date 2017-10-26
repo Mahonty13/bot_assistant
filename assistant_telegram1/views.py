@@ -157,14 +157,14 @@ def assistant_body(chat_id,date_in_s,message):
                     return {"text": "Команды не найдено"}                
             else:
         	#if something is missing
-            for ent in necessary_story_entities:
-                if ent not in context_entities_list:
-                #send question of missing entity
-                    current_story=current_chat.intent.story_action
-                    entity_question=Story_entity.objects.get(intent=current_story,name=ent).question
-                    print(entity_question)
-                    current_chat.prev_msg_from_bot=entity_question
-                    current_chat.save()
-                    print("current_chat in the end "+str(current_chat))
-                    return {"text": entity_question}
+                for ent in necessary_story_entities:
+                    if ent not in context_entities_list:
+                    #send question of missing entity
+                        current_story=current_chat.intent.story_action
+                        entity_question=Story_entity.objects.get(intent=current_story,name=ent).question
+                        print(entity_question)
+                        current_chat.prev_msg_from_bot=entity_question
+                        current_chat.save()
+                        print("current_chat in the end "+str(current_chat))
+                        return {"text": entity_question}
     return HttpResponse(status=200)
