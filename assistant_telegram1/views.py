@@ -152,10 +152,10 @@ def assistant_body(chat_id,date_in_s,message):
                         return {"text": answer}
                 else:
                 #In case of an apocalypse
-                print("Команды не найдено")
-                current_chat.delete()
-                return {"text": "Команды не найдено"}                
-            else:
+                    print("Команды не найдено")
+                    current_chat.delete()
+                    return {"text": "Команды не найдено"}                
+           	else:
         	#if something is missing
             for ent in necessary_story_entities:
                 if ent not in context_entities_list:
