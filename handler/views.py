@@ -10,7 +10,7 @@ from assistant_telegram1.views import assistant_body
 
 # Create your views here.
 token_telegram ='465116134:AAEBZ9TEMk1b2kx8uySx-GZllAcHIy5I4js'
-client = Wit('TCLMX5YEBCRG5TO2TLW3VJCOGFOWMOJW')
+client = Wit('OHNOVUONWOIA3NPRI2ER4CNMDBAWAJBX')
 
 def handler_commands(data):
     if data['text'] == '/start':
@@ -67,8 +67,35 @@ def send_tg_voice(chat_id, text):
     # r = requests.post('https://api.telegram.org/bot'+token_telegram+ "/sendVoice", params=payload, files=file)
     g = requests.post('https://api.telegram.org/bot'+token_telegram+ "/sendVoice", params=payload, files=file1)
 
-actions_story={
 
+
+
+##ADD HERE##
+
+def template_action(entities):
+
+    #add your actions
+
+    #create dictionary with name of variables(key) and values of variables required for your answer
+    answer_vars={}
+    answer_vars['variable_name']='value'
+    return answer_vars
+
+
+def currency_exchange(entities):
+
+    #add your actions
+
+    #create dictionary with name of variables(key) and values of variables required for your answer
+    answer_vars={}
+    answer_vars['currencyFrom']='1 доллар'
+    answer_vars['currencyTo']='340 тенге'
+
+    return answer_vars
+
+
+actions_story={
+"currency_exchange":currency_exchange
 }
 
 
@@ -79,70 +106,71 @@ def bot_new(request):
     #в request все данные из сообщения
     data=json.loads(request.body)
     print("data      " + str(data))
-  #   chat_id=data['message']['chat']['id']
-  #   #text handler
-  #   if 'text' in data['message']:
-  #       #if commands / as start,help
-  #       if data['message']['text'][0] == '/':
-  #           #command handler
-  #           handler_commands(data['message'])
-  #           return HttpResponse(status=200)
-  #       else:
-  #           #текст сообщения, которое мы отправим app assistant 
-  #           message=data['message']['text']
-  #   else:
-  #   	pass
-		# #if voice message
-  #       # if 'voice' in data['message']:
-  #       #     message=" "
-  #       #     #Если пустое аудио, то сообщение останется пустым и не отвеченным
-  #       #     if data['message']['voice']['file_size']<2500:
-  #       #         return HttpResponse(status=200)
-  #       #     #Находим file_path, чтобы скачать аудио
-  #       #     r = json.loads(str(requests.get('http://api.telegram.org/bot'+token_telegram+'/getFile', params={'file_id':data['message']['voice']['file_id']}).text))
-  #       #     #Скачиваем аудио по file_path
-  #       #     g=requests.get('http://api.telegram.org/file/bot'+token_telegram+'/'+str(r['result']['file_path']), stream=True)
-  #       #     print("Request from telegram audio file_path" + str(g))
-  #       #     #Записываем аудио в файл voice.ogg, который хранится в главной папке django проекта
-  #       #     with open("voice.ogg", "wb") as o:
-  #       #         o.write(g.content)
-  #       #     #convert ogg to wav
-  #       #     AudioSegment.from_ogg("voice.ogg").export("voice.mp3", format="mp3")
-  #       #     #recognition
+    chat_id=data['message']['chat']['id']
+    date_in_s=int(data['message']['date'])
+    #text handler
+    if 'text' in data['message']:
+        #if commands / as start,help
+        if data['message']['text'][0] == '/':
+            #command handler
+            handler_commands(data['message'])
+            return HttpResponse(status=200)
+        else:
+            #текст сообщения, которое мы отправим app assistant 
+            message=data['message']['text']
+    else:
+    	pass
+		#if voice message
+        # if 'voice' in data['message']:
+        #     message=" "
+        #     #Если пустое аудио, то сообщение останется пустым и не отвеченным
+        #     if data['message']['voice']['file_size']<2500:
+        #         return HttpResponse(status=200)
+        #     #Находим file_path, чтобы скачать аудио
+        #     r = json.loads(str(requests.get('http://api.telegram.org/bot'+token_telegram+'/getFile', params={'file_id':data['message']['voice']['file_id']}).text))
+        #     #Скачиваем аудио по file_path
+        #     g=requests.get('http://api.telegram.org/file/bot'+token_telegram+'/'+str(r['result']['file_path']), stream=True)
+        #     print("Request from telegram audio file_path" + str(g))
+        #     #Записываем аудио в файл voice.ogg, который хранится в главной папке django проекта
+        #     with open("voice.ogg", "wb") as o:
+        #         o.write(g.content)
+        #     #convert ogg to wav
+        #     AudioSegment.from_ogg("voice.ogg").export("voice.mp3", format="mp3")
+        #     #recognition
             
-  #       #     with open('voice.mp3', 'rb') as f:
-  #       #         try:
-  #       #             resp = client.speech(f, None, {'Content-Type': 'audio/mpeg3'})
-  #       #             print('Yay, got Wit.ai response: ' + str(resp))
-  #       #             if "_text" in resp:
-  #       #                 #текст сообщения, которое мы отправим app assistant 
-  #       #                 message = resp['_text']
-  #       #         except:
-  #       #             pass
-  #       #     print(message)
-  #       #     #Если не смог распознать, то меняем None на " ", чтобы не возникла ошибка
-  #       #     if message==None:
-  #       #         message=" "
-  #           # print(message)
-  #   #Отправляем сообщение app assistant, app assistant отправляет нам ответ в json формате
-  #   #структура answer {"text": "текст ответа инф вопроса"}
-  #   #структура answer для action {"action": "name_of_function", "answer": "Ваш почтовый индекс - {post_index}","entities": entities}
-  #   #entities - это dictionary, где key - name of entity, нужный для осуществления конкретного action, value - его value
-  #   answer=assistant_body(chat_id,message)
-  #   if 'text' in answer:
-  #       send(chat_id,answer['text'])
-  #   if "action" in answer:
-  #       try:
-  #           #тут вызывается action, assistant возвращает название функции, и функция вызывается через actions_story
-  #           #answer vars это variables нужный для ответа action
-  #           answer_vars=actions_story[answer['action']](chat_id,answer['entities'])
-  #           print("answer_vars body :" + str(answer_vars))
-  #           #формируется готовый ответ
-  #           answer_to_user=answer['answer'].format(**answer_vars)
-  #           print("Answer:   " +  answer_to_user)
-  #           send(chat_id, answer_to_user)
-  #       except:
-  #           send(chat_id, "Ваш запрос не удался")
+        #     with open('voice.mp3', 'rb') as f:
+        #         try:
+        #             resp = client.speech(f, None, {'Content-Type': 'audio/mpeg3'})
+        #             print('Yay, got Wit.ai response: ' + str(resp))
+        #             if "_text" in resp:
+        #                 #текст сообщения, которое мы отправим app assistant 
+        #                 message = resp['_text']
+        #         except:
+        #             pass
+        #     print(message)
+        #     #Если не смог распознать, то меняем None на " ", чтобы не возникла ошибка
+        #     if message==None:
+        #         message=" "
+            # print(message)
+    #Отправляем сообщение app assistant, app assistant отправляет нам ответ в json формате
+    #структура answer {"text": "текст ответа инф вопроса"}
+    #структура answer для action {"action": "name_of_function", "answer": "Ваш почтовый индекс - {post_index}","entities": entities}
+    #entities - это dictionary, где key - name of entity, нужный для осуществления конкретного action, value - его value
+    answer=assistant_body(chat_id,date_in_s,message)
+    if 'text' in answer:
+        send(chat_id,answer['text'])
+    if "action" in answer:
+        try:
+            #тут вызывается action, assistant возвращает название функции, и функция вызывается через actions_story
+            #answer vars это variables нужный для ответа action
+            answer_vars=actions_story[answer['action']](answer['entities'])
+            print("answer_vars body :" + str(answer_vars))
+            #формируется готовый ответ
+            answer_to_user=answer['answer'].format(**answer_vars)
+            print("Answer:   " +  answer_to_user)
+            send(chat_id, answer_to_user)
+        except:
+            send(chat_id, "Ваш запрос не удался")
             
 
     return HttpResponse(status=200)
