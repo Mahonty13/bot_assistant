@@ -100,7 +100,7 @@ def assistant_body(chat_id,message):
     # current_story=Story.objects.get(intent=current_chat.intent)
     # necessary_story_entities=[]
     # for story_ent in current_story.story_entity_set.all():
-    # 	if story_ent.name!=" ":
+    # 	if story_ent.name!=" ":  
     #     	necessary_story_entities.append(story_ent.name)
     # print(str(chat_id) + "   necessary entities for story: "+str(necessary_story_entities))
     # #add entities to the context
