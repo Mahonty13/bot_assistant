@@ -126,6 +126,11 @@ def assistant_body(chat_id,date_in_s,message):
         context_entities_list[entity.name]=entity.value
     print(str(chat_id) + "  context:     " + str(context_entities_list))
 
+
+    #logs
+    log=Log(msg=message,intent=current_chat.intent,date_in_s=date_in_s,chat_id=current_chat_id)
+    log.save()
+    
     if hasattr(current_chat.intent,'story_msg'):
         answer=current_chat.intent.story_msg.answer
         print(answer)
