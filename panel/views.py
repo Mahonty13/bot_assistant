@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from assistant_telegram1.models import *
 from django.core.urlresolvers import reverse_lazy
 from .forms import IntentForm,Story_msgForm,Story_actionForm
+from handler.views import send
 # Create your views here.
 class Index_intentsView(generic.ListView):
 	template_name="intent/index_intents.html"
@@ -98,6 +99,15 @@ def detail_chat_id(request,pk):
     chat_id = get_object_or_404(Chat_id, pk=pk)
 
     return render(request, 'intent/detail_chat_id.html', {'chat_id': chat_id})
+def send_all(request):
+    if request.method == "POST":
+        text=request.POST.get("text")
+        chat_ids=Chat_id.objects.all()
+        for chat_id in chat_ids:
+            send(chat_id.idnumber,text)
+        return redirect('panel:index_intents')
+    else:
+        return render(request, 'intent/send_all.html',{})
 
 # class IntentCreate(CreateView):
 # 	model=Intent

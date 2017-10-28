@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^logs/$', views.Index_logsView.as_view(), name="index_logs"),
     url(r'^chat_ids/$', views.Index_chat_idsView.as_view(), name="index_chat_ids"),
     url(r'^chat_id/(?P<pk>[0-9]+)/$', views.detail_chat_id, name="detail_chat_id"),
-
+    url(r'^send_all/$', views.send_all, name="send_all"),
 ]
