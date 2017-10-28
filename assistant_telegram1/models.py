@@ -95,7 +95,7 @@ class Story_entity(models.Model):
 class Log(models.Model):
 	msg=models.TextField(max_length=200, default=" ")
 	intent=models.ForeignKey(Intent,on_delete=models.SET_NULL,null=True)
-	date=models.DateField(auto_now=True)
+	date=models.DateTimeField(auto_now=True)
 	chat_id=models.ForeignKey(Chat_id,on_delete=models.SET_NULL,null=True)
 	viewed=models.BooleanField(default="False")
 
