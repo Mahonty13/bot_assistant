@@ -24,9 +24,9 @@ def detail_intent(request,pk):
             if form.is_valid():
                 if hasattr(intent,"story_action"):
                     intent.story_action.delete()
-                    story_msg=form.save(commit=False)
-                    story_msg.intent=intent
-                    story_msg.save()
+                story_msg=form.save(commit=False)
+                story_msg.intent=intent
+                story_msg.save()
                 return redirect('panel:index_intents')
         else:
             if intent.intent_type=="action":
@@ -37,9 +37,9 @@ def detail_intent(request,pk):
                 if form.is_valid():
                     if hasattr(intent,"story_msg"):
                         intent.story_msg.delete()
-                        story_action=form.save(commit=False)
-                        story_action.intent=intent
-                        story_action.save()
+                    story_action=form.save(commit=False)
+                    story_action.intent=intent
+                    story_action.save()
                     return redirect('panel:index_intents')
     else:
         if intent.intent_type=="msg":
