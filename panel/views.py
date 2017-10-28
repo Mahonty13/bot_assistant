@@ -26,8 +26,7 @@ class IntentUpdate(UpdateView):
 
 class IntentDelete(DeleteView):
 	model=Intent
-	template_name='intent/intent_form.html'
-	fields=["name"]
+	success_url=reverse_lazy('panel:index_intents')
 
 # def index_intents(request):
 # 	all_intents=Intent.objects.all()

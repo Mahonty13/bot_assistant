@@ -3,7 +3,14 @@ from django.core.urlresolvers import reverse
 # Create your models here.
 class Intent(models.Model):
 	name=models.CharField(primary_key=True,max_length=60)
-
+	msg="msg"
+	act="action"
+	intent_type_choices=(
+        (msg, 'message'),
+        (act, 'action'),
+    )
+	intent_type=models.CharField(max_length=10,choices=intent_type_choices,default=msg)
+	
 	def get_absolute_url(self):
 		return reverse('panel:detail_intent',kwargs={'pk':self.pk})
 	def __str__(self):

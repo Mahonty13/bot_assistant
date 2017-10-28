@@ -8,9 +8,44 @@
 
 	{% if all_intents %}
 		<h3> Все Intents: </h3>
-		{%for intent in all_intents %}
-			<a href="{% url 'panel:detail_intent' intent.name %}"><h3>{{intent.name}}</h3></a>
-		{%endfor%}
+		<div class="panel panel-default">
+                <div class="panel-body">
+			<table class="table">
+                        <thead>
+                        <tr>
+                            <th>Наименование</th>
+                            <th>Тип</th>
+                            <th>Действие</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for intent in all_intents %}
+                            <tr>
+                                <td><a href="{% url 'panel:intent-update' intent.name%}">{{ intent.name }}
+                                </a></td>
+                                <td>
+                                	{% if intent.story_msg %}
+                                		msg
+                                	{% elif intent.story_action %}
+                                		action
+                                	{%endif%}
+                                </td>
+                                <td>
+                                    <form action="{% url 'panel:intent-delete' intent.name %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="intent_pk" value="{{ intent.name }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Удалить
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+	  			</div>
+            </div>
+		
 	{% else %}
 		<h3>Intentы не найдены</h3>
 	{% endif %}

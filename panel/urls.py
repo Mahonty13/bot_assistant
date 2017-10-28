@@ -19,6 +19,8 @@ from . import views
 app_name="panel"
 urlpatterns = [
     url(r'^intents/$', views.Index_intentsView.as_view(), name="index_intents"),
-    url(r'^intent/(?P<pk>.+)/$', views.Detail_intentView.as_view(), name="detail_intent"),
-    url(r'^intents/add/$', views.IntentCreate.as_view(), name="intents-add"),
+    url(r'^intents/(?P<pk>.+)/$', views.Detail_intentView.as_view(), name="detail_intent"),
+    url(r'^intent/add/$', views.IntentCreate.as_view(), name="intent-add"),
+    url(r'^intent/(?P<pk>.+)/$', views.IntentUpdate.as_view(), name="intent-update"),
+    url(r'^intents/(?P<pk>.+)/delete$', views.IntentDelete.as_view(), name="intent-delete"),
 ]
