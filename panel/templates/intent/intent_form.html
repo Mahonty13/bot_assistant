@@ -1,0 +1,14 @@
+{% extends 'intent/base.html'%}
+
+{% block title%} 
+	Панель Администратора
+{%endblock%}
+
+{%block body%}
+	<form class="form-horizontal" action="" method="post">
+		{% csrf_token %}
+		{%include 'intent/form-template.html' %}
+		<button type="submit">Submit</button>
+	</form>
+
+{%endblock%}

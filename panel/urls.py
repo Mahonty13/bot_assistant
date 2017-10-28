@@ -13,13 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
-from django.contrib import admin
-from handler.views import bot_new
-import panel.urls
 
+from django.conf.urls import url,include
+from . import views
+app_name="panel"
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^webhook/', bot_new),
-    url(r'^paneladmin/', include(panel.urls))
+    url(r'^intents/$', views.Index_intentsView.as_view(), name="index_intents"),
+    url(r'^intent/(?P<pk>.+)/$', views.Detail_intentView.as_view(), name="detail_intent"),
+    url(r'^intents/add/$', views.IntentCreate.as_view(), name="intents-add"),
 ]

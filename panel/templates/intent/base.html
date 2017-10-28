@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{%block title%}Панель Администратора{%endblock%}</title>
+	{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+</head>
+<body>
+	<a href="{% url 'panel:intents-add' %}">Создать Intent</a>
+{% block body%}
+{% endblock %}
+</body>
+</html>

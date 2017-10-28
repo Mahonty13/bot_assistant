@@ -1,0 +1,17 @@
+{% extends 'intent/base.html'%}
+
+{% block title%} 
+	Панель Администратора
+{%endblock%}
+
+{%block body %}
+
+	{% if all_intents %}
+		<h3> Все Intents: </h3>
+		{%for intent in all_intents %}
+			<a href="{% url 'panel:detail_intent' intent.name %}"><h3>{{intent.name}}</h3></a>
+		{%endfor%}
+	{% else %}
+		<h3>Intentы не найдены</h3>
+	{% endif %}
+{%endblock%}

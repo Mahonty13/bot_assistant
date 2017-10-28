@@ -26,7 +26,7 @@ SECRET_KEY = '@(p#c*ee4hte@e726198go-&g)b0n8k3bvok)d-jdko_^r(^nv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bankassistantkz1.herokuapp.com']
+ALLOWED_HOSTS = ['bankassistantkz1.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'handler',
-    'assistant_telegram1'
+    'assistant_telegram1',
+    'panel'
 ]
 
 MIDDLEWARE = [

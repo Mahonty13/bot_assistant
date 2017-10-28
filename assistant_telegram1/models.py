@@ -1,9 +1,11 @@
 from django.db import models
-
+from django.core.urlresolvers import reverse
 # Create your models here.
 class Intent(models.Model):
 	name=models.CharField(primary_key=True,max_length=60)
 
+	def get_absolute_url(self):
+		return reverse('panel:detail_intent',kwargs={'pk':self.pk})
 	def __str__(self):
 		str1=str(self.name)
 		return str1
