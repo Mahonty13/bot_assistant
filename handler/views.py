@@ -107,7 +107,6 @@ def bot_new(request):
     data=json.loads(request.body)
     print("data      " + str(data))
     chat_id=data['message']['chat']['id']
-    date_in_s=int(data['message']['date'])
     #text handler
     if 'text' in data['message']:
         #if commands / as start,help
@@ -156,7 +155,7 @@ def bot_new(request):
     #структура answer {"text": "текст ответа инф вопроса"}
     #структура answer для action {"action": "name_of_function", "answer": "Ваш почтовый индекс - {post_index}","entities": entities}
     #entities - это dictionary, где key - name of entity, нужный для осуществления конкретного action, value - его value
-    answer=assistant_body(chat_id,date_in_s,message)
+    answer=assistant_body(chat_id,message)
     if 'text' in answer:
         send(chat_id,answer['text'])
     if "action" in answer:

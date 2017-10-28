@@ -10,7 +10,7 @@ from assistant_telegram1.models import *
 client = Wit('OHNOVUONWOIA3NPRI2ER4CNMDBAWAJBX')
 
 @csrf_exempt
-def assistant_body(chat_id,date_in_s,message):
+def assistant_body(chat_id,message):
     #Сохраняем чат id в БД
     if not Chat_id.objects.filter(idnumber=chat_id).exists():
         chat_idmodel=Chat_id(idnumber=int(chat_id))
@@ -65,7 +65,7 @@ def assistant_body(chat_id,date_in_s,message):
 
     current_chat=current_chat_id.context_chat
     #logs
-    log=Log(msg=message,intent=current_chat.intent,date_in_s=date_in_s,chat_id=current_chat_id)
+    log=Log(msg=message,intent=current_chat.intent,chat_id=current_chat_id)
     log.save()
     #Подтверждения нужны, чтобы не прошли ненужные запросы
     if "confirmation" in msg_entities:
