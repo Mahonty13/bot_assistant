@@ -85,7 +85,7 @@ class Index_logsView(generic.ListView):
     context_object_name="all_logs"
 
     def get_queryset(self):
-        return Log.objects.all()
+        return Log.objects.all().order_by("-pk")
 
 # class IntentCreate(CreateView):
 # 	model=Intent
