@@ -24,5 +24,7 @@ urlpatterns = [
     url(r'^intent/(?P<pk>\w+)/edit$', views.intent_edit, name="intent_edit"),
     url(r'^intents/(?P<pk>\w+)/delete$', views.IntentDelete.as_view(), name="intent-delete"),
     url(r'^logs/$', views.Index_logsView.as_view(), name="index_logs"),
+    url(r'^chat_ids/$', views.Index_chat_idsView.as_view(), name="index_chat_ids"),
+    url(r'^chat_id/(?P<pk>[0-9]+)/$', views.detail_chat_id, name="detail_chat_id"),
 
 ]

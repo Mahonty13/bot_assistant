@@ -1,0 +1,40 @@
+{% extends 'intent/base.html'%}
+
+{% block title%} 
+	Панель Администратора
+{%endblock%}
+
+{%block body %}
+
+	{% if all_chat_ids %}
+		<h3> Все Id Диалогов: </h3>
+		<div class="panel panel-default">
+                <div class="panel-body">
+			<table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Кол-во сообщений</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for chat_id in all_chat_ids %}
+                            <tr>
+                                <td><a href="{% url 'panel:detail_chat_id' chat_id.idnumber %}">{{ chat_id.idnumber }}
+                                </a></td>
+                                <td>
+                                	{{chat_id.log_set.all.count}}
+                                </td>
+                                 
+                            
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+	  			</div>
+            </div>
+		
+	{% else %}
+		<h3>Диалоги не найдены не найдены</h3>
+	{% endif %}
+{%endblock%}

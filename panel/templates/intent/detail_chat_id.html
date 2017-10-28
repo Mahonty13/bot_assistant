@@ -1,0 +1,44 @@
+{% extends 'intent/base.html'%}
+
+{% block title%} 
+	Панель Администратора
+{%endblock%}
+
+{%block body %}
+
+
+		<h3> Диалог {{chat_id}} </h3>
+		<div class="panel panel-default">
+                <div class="panel-body">
+			<table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID Сообщения</th>
+                            <th>Сообщения</th>
+                            <th>Intents</th>
+                            <th>Дата</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for log in chat_id.log_set.all %}
+                            <tr>
+                                <td>{{ log.pk }}
+                                </td>
+                                <td>{{ log.msg }}
+                                </td>
+                                <td>
+                                	<a href="{% url 'panel:detail_intent' log.intent.name %}">{{log.intent.name}}</a>
+                                </td>
+                                 <td>
+                                    {{log.date}}
+                                </td>
+                            
+                               
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+	  			</div>
+            </div>
+
+{%endblock%}

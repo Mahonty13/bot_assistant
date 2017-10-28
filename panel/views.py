@@ -87,6 +87,18 @@ class Index_logsView(generic.ListView):
     def get_queryset(self):
         return Log.objects.all().order_by("-pk")
 
+class Index_chat_idsView(generic.ListView):
+    template_name="intent/index_chat_ids.html"
+    context_object_name="all_chat_ids"
+
+    def get_queryset(self):
+        return Chat_id.objects.all()
+
+def detail_chat_id(request,pk):
+    chat_id = get_object_or_404(Chat_id, pk=pk)
+
+    return render(request, 'intent/detail_chat_id.html', {'chat_id': chat_id})
+
 # class IntentCreate(CreateView):
 # 	model=Intent
 # 	template_name='intent/intent_form.html'
