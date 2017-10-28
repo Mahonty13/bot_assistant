@@ -22,8 +22,8 @@ def assistant_body(chat_id,date_in_s,message):
     # #создаем list всех существующих интентов в stories
     story_intents=[]
     for intent in Intent.objects.all():
-        story_intents.append(intent.name)
-
+        if hasattr(intent,"story_msg") or hasattr(intent,"story_action"):
+            story_intents.append(intent.name)
     print(str(chat_id) + "   get_msg:    "+str(resps))
     resps=resps['entities']
     msg_entities={}
