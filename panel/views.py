@@ -80,6 +80,13 @@ def intent_edit(request, pk):
         form = IntentForm(instance=intent)
     return render(request, 'intent/intent_edit.html', {'form': form})
 
+class Index_logsView(generic.ListView):
+    template_name="intent/index_logs.html"
+    context_object_name="all_logs"
+
+    def get_queryset(self):
+        return Log.objects.all()
+
 # class IntentCreate(CreateView):
 # 	model=Intent
 # 	template_name='intent/intent_form.html'
@@ -93,11 +100,3 @@ def intent_edit(request, pk):
 class IntentDelete(DeleteView):
 	model=Intent
 	success_url=reverse_lazy('panel:index_intents')
-
-# def index_intents(request):
-# 	all_intents=Intent.objects.all()
-# 	return render(request,"intent/index_intents.html",{"all_intents":all_intents})
-
-# def detail_intent(request,intent_name):
-# 	intent=get_object_or_404(Intent,name=intent_name)
-# 	return render(request,"intent/detail_intent.html",{"intent":intent})

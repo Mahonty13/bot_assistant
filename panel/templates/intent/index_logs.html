@@ -1,0 +1,46 @@
+{% extends 'intent/base.html'%}
+
+{% block title%} 
+	Панель Администратора
+{%endblock%}
+
+{%block body %}
+
+	{% if all_logs %}
+		<h3> Все Сообщения: </h3>
+		<div class="panel panel-default">
+                <div class="panel-body">
+			<table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Сообщение</th>
+                            <th>Intent</th>
+                            <th>Дата</th>
+                            <th>Чат</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for log in all_logs %}
+                            <tr>
+                                <td>{{ log.pk }}</td>
+                                <td>
+                                	{{log.msg}}
+                                </td>
+                                 <td><a href="{% url 'panel:detail_intent' log.intent.name %}">{{log.intent.name}}</a>
+                                </td>
+                                <td>
+                                    
+                                </td>
+                               
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+	  			</div>
+            </div>
+		
+	{% else %}
+		<h3>  Сообщения не найдены</h3>
+	{% endif %}
+{%endblock%}

@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^intent/add/$', views.intent_new, name="intent_add"),
     url(r'^intent/(?P<pk>\w+)/edit$', views.intent_edit, name="intent_edit"),
     url(r'^intents/(?P<pk>\w+)/delete$', views.IntentDelete.as_view(), name="intent-delete"),
+    url(r'^logs/$', views.Index_logsView.as_view(), name="index_logs"),
+
 ]
