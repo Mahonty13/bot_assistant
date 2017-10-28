@@ -15,20 +15,24 @@
                         <tr>
                             <th>Наименование</th>
                             <th>Тип</th>
+                            <th>Story</th>
                             <th>Действие</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for intent in all_intents %}
                             <tr>
-                                <td><a href="{% url 'panel:intent-update' intent.name%}">{{ intent.name }}
+                                <td><a href="{% url 'panel:detail_intent' intent.name%}">{{ intent.name }}
                                 </a></td>
                                 <td>
-                                	{% if intent.story_msg %}
-                                		msg
-                                	{% elif intent.story_action %}
-                                		action
-                                	{%endif%}
+                                	{{intent.intent_type}}
+                                </td>
+                                 <td>
+                                    {% if intent.intent_type == "msg" and intent.story_msg or intent.intent_type == "action" and intent.story_action%}
+                                        <span >есть
+                                    {%else%}
+                                        <p style="color:red;">нет</p>
+                                    {%endif%}
                                 </td>
                                 <td>
                                     <form action="{% url 'panel:intent-delete' intent.name %}" method="post" style="display: inline;">
@@ -39,6 +43,7 @@
                                         </button>
                                     </form>
                                 </td>
+                               
                             </tr>
                         {% endfor %}
                         </tbody>

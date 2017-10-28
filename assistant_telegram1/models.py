@@ -74,6 +74,7 @@ class Story_action(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+	msg_example=models.TextField(default=" ")
 	validation_option=models.BooleanField(default="False")
 	action_name=models.CharField(max_length=60,default=" ")
 	action_answer=models.TextField(default=" ")
