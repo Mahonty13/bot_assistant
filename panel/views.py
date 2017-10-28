@@ -1,7 +1,7 @@
 from django.views import generic
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from assistant_telegram1.models import *
-
+from django.core.urlresolvers import reverse_lazy
 # Create your views here.
 class Index_intentsView(generic.ListView):
 	template_name="intent/index_intents.html"
@@ -15,6 +15,16 @@ class Detail_intentView(generic.DetailView):
 	template_name="intent/detail_intent.html"
 
 class IntentCreate(CreateView):
+	model=Intent
+	template_name='intent/intent_form.html'
+	fields=["name"]
+
+class IntentUpdate(UpdateView):
+	model=Intent
+	template_name='intent/intent_form.html'
+	fields=["name"]
+
+class IntentDelete(DeleteView):
 	model=Intent
 	template_name='intent/intent_form.html'
 	fields=["name"]
