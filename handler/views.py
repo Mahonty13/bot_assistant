@@ -90,12 +90,16 @@ def find_nearest(entities):
     "key":"AIzaSyCXpzQv9l2oSOFyXzm5KMqDDiFFoaxLgA0",
     "address":entities['loc'],
     }
-    r=requests("https://maps.googleapis.com/maps/api/geocode/json?parameters",params=payload).text
-    print(r)
+    r=json.loads(requests("https://maps.googleapis.com/maps/api/geocode/json",params=payload).text)
+    lat=0
+    lng=0
+    for address in r['results'][0]["address_components"]:
+        lat=r['results'][0]["geometry"]["location"]['lat']
+        lng=r['results'][0]["geometry"]["location"]['lng']
     #create dictionary with name of variables(key) and values of variables required for your answer
     answer_vars={}
     answer_vars['geo_type']=entities['geo_type']
-    answer_vars['coordinates']="1111"
+    answer_vars['coordinates']=str(lat)+" " + lng
     return answer_vars
 
 
