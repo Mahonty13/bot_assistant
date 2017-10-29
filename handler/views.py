@@ -83,7 +83,7 @@ def template_action(entities):
     return answer_vars
 
 
-def template_action(entities):
+def find_nearest(entities):
 
     #add your actions
     payloads={
