@@ -83,20 +83,24 @@ def template_action(entities):
     return answer_vars
 
 
-def currency_exchange(entities):
+def template_action(entities):
 
     #add your actions
-
+    payloads={
+    "key":"AIzaSyCXpzQv9l2oSOFyXzm5KMqDDiFFoaxLgA0",
+    "address":entities['loc'],
+    }
+    r=requests("https://maps.googleapis.com/maps/api/geocode/json?parameters",params=payload).text
+    print(r)
     #create dictionary with name of variables(key) and values of variables required for your answer
     answer_vars={}
-    answer_vars['currencyFrom']='1 доллар'
-    answer_vars['currencyTo']='340 тенге'
-
+    answer_vars['geo_type']=entities['geo_type']
+    answer_vars['coordinates']="1111"
     return answer_vars
 
 
 actions_story={
-"currency_exchange":currency_exchange
+"find_nearest":find_nearest
 }
 
 
