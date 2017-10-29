@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^webhook/', bot_new),
     url(r'^paneladmin/', include(panel.urls))
-    url(r'^handler/(?P<message>.+)', browser_api)
+    url(r'^handler/(?P<message>.+)/$', browser_api)
 
 ]
