@@ -120,7 +120,7 @@ def send_all(request):
     else:
         return render(request, 'intent/send_all.html',{})
 
-def send_all(request,pk):
+def send_chat_id(request,pk):
     chat_id = get_object_or_404(Chat_id, pk=pk)
     if request.method == "POST":
         text=request.POST.get("text")
