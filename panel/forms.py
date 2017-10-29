@@ -50,3 +50,10 @@ class Story_actionForm(forms.ModelForm):
         'desc':'Описание'
         }
         fields = ('msg_example', 'validation_option',"action_name","action_answer","transcript","desc")
+
+class Story_entityForm(forms.ModelForm):
+
+    class Meta:
+        model = Story_entity
+
+        fields = ('name', 'question')

@@ -28,4 +28,5 @@ urlpatterns = [
     url(r'^chat_id/(?P<pk>[0-9]+)/$', views.detail_chat_id, name="detail_chat_id"),
     url(r'^send_all/$', views.send_all, name="send_all"),
     url(r'^chat_id/(?P<pk>[0-9]+)/send$', views.send_chat_id, name="send_chat_id"),
+    url(r'^intent/(?P<pk>\w+)/story_entity/add$', views.story_entity_add, name="story_entity_add"),
 ]
