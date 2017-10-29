@@ -120,6 +120,16 @@ def send_all(request):
     else:
         return render(request, 'intent/send_all.html',{})
 
+def send_all(request,pk):
+    chat_id = get_object_or_404(Chat_id, pk=pk)
+    if request.method == "POST":
+        text=request.POST.get("text")
+        send(chat_id.idnumber,text)
+        return redirect('panel:index_intents')
+    else:
+        return render(request, 'intent/send_chat_id.html',{"chat_id":chat_id})
+
+
 # class IntentCreate(CreateView):
 # 	model=Intent
 # 	template_name='intent/intent_form.html'
