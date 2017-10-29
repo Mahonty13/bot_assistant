@@ -96,7 +96,7 @@ def find_nearest(entities):
     #create dictionary with name of variables(key) and values of variables required for your answer
     answer_vars={}
     answer_vars['geo_type']=entities['geo_type']
-    answer_vars['coordinates']=str(lat)+" " + lng
+    answer_vars['coordinates']=str(lat)+" " + str(lng)
     return answer_vars
 
 
@@ -165,17 +165,17 @@ def bot_new(request):
     if 'text' in answer:
         send(chat_id,answer['text'])
     if "action" in answer:
-        # try:
+        try:
             #тут вызывается action, assistant возвращает название функции, и функция вызывается через actions_story
             #answer vars это variables нужный для ответа action
-        answer_vars=actions_story[answer['action']](answer['entities'])
-        print("answer_vars body :" + str(answer_vars))
+            answer_vars=actions_story[answer['action']](answer['entities'])
+            print("answer_vars body :" + str(answer_vars))
             #формируется готовый ответ
-        answer_to_user=answer['answer'].format(**answer_vars)
-        print("Answer:   " +  answer_to_user)
-        send(chat_id, answer_to_user)
-        # except:
-        #     send(chat_id, "Ваш запрос не удался")
+            answer_to_user=answer['answer'].format(**answer_vars)
+            print("Answer:   " +  answer_to_user)
+            send(chat_id, answer_to_user)
+        except:
+            send(chat_id, "Ваш запрос не удался")
             
 
     return HttpResponse(status=200)
