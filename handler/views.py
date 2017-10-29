@@ -119,38 +119,38 @@ def bot_new(request):
             message=data['message']['text']
     else:
     	pass
-		#if voice message
-        # if 'voice' in data['message']:
-        #     message=" "
-        #     #Если пустое аудио, то сообщение останется пустым и не отвеченным
-        #     if data['message']['voice']['file_size']<2500:
-        #         return HttpResponse(status=200)
-        #     #Находим file_path, чтобы скачать аудио
-        #     r = json.loads(str(requests.get('http://api.telegram.org/bot'+token_telegram+'/getFile', params={'file_id':data['message']['voice']['file_id']}).text))
-        #     #Скачиваем аудио по file_path
-        #     g=requests.get('http://api.telegram.org/file/bot'+token_telegram+'/'+str(r['result']['file_path']), stream=True)
-        #     print("Request from telegram audio file_path" + str(g))
-        #     #Записываем аудио в файл voice.ogg, который хранится в главной папке django проекта
-        #     with open("voice.ogg", "wb") as o:
-        #         o.write(g.content)
-        #     #convert ogg to wav
-        #     AudioSegment.from_ogg("voice.ogg").export("voice.mp3", format="mp3")
-        #     #recognition
+		if voice message
+        if 'voice' in data['message']:
+            message=" "
+            #Если пустое аудио, то сообщение останется пустым и не отвеченным
+            if data['message']['voice']['file_size']<2500:
+                return HttpResponse(status=200)
+            #Находим file_path, чтобы скачать аудио
+            r = json.loads(str(requests.get('http://api.telegram.org/bot'+token_telegram+'/getFile', params={'file_id':data['message']['voice']['file_id']}).text))
+            #Скачиваем аудио по file_path
+            g=requests.get('http://api.telegram.org/file/bot'+token_telegram+'/'+str(r['result']['file_path']), stream=True)
+            print("Request from telegram audio file_path" + str(g))
+            #Записываем аудио в файл voice.ogg, который хранится в главной папке django проекта
+            with open("voice.ogg", "wb") as o:
+                o.write(g.content)
+            #convert ogg to wav
+            AudioSegment.from_ogg("voice.ogg").export("voice.mp3", format="mp3")
+            #recognition
             
-        #     with open('voice.mp3', 'rb') as f:
-        #         try:
-        #             resp = client.speech(f, None, {'Content-Type': 'audio/mpeg3'})
-        #             print('Yay, got Wit.ai response: ' + str(resp))
-        #             if "_text" in resp:
-        #                 #текст сообщения, которое мы отправим app assistant 
-        #                 message = resp['_text']
-        #         except:
-        #             pass
-        #     print(message)
-        #     #Если не смог распознать, то меняем None на " ", чтобы не возникла ошибка
-        #     if message==None:
-        #         message=" "
-            # print(message)
+            with open('voice.mp3', 'rb') as f:
+                try:
+                    resp = client.speech(f, None, {'Content-Type': 'audio/mpeg3'})
+                    print('Yay, got Wit.ai response: ' + str(resp))
+                    if "_text" in resp:
+                        #текст сообщения, которое мы отправим app assistant 
+                        message = resp['_text']
+                except:
+                    pass
+            print(message)
+            #Если не смог распознать, то меняем None на " ", чтобы не возникла ошибка
+            if message==None:
+                message=" "
+            print(message)
     #Отправляем сообщение app assistant, app assistant отправляет нам ответ в json формате
     #структура answer {"text": "текст ответа инф вопроса"}
     #структура answer для action {"action": "name_of_function", "answer": "Ваш почтовый индекс - {post_index}","entities": entities}
