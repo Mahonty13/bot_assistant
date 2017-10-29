@@ -31,6 +31,29 @@
                     </form>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                     <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Наименование Entity</th>
+                            <th>Вопрос (если нету)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for story_ent in intent.story_action.story_entity_set.all %}
+                            <tr>
+                                <td>{{ story_ent.name }}
+                                </td>
+                                <td>
+                                    {{story_ent.question}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 	{% if error_message %}
 		<p><strong>{{error_message}}</strong></p>
