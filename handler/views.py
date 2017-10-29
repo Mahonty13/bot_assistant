@@ -118,8 +118,8 @@ def bot_new(request):
             #текст сообщения, которое мы отправим app assistant 
             message=data['message']['text']
     else:
-    	pass
-		if voice message
+
+		# if voice message
         if 'voice' in data['message']:
             message=" "
             #Если пустое аудио, то сообщение останется пустым и не отвеченным
