@@ -27,7 +27,7 @@
                                 <td>
                                 	{{log.msg}}
                                 </td>
-                                 <td>{% if log.intent %}<a href="{% url 'panel:detail_intent' log.intent.name %}">{{log.intent.name}}</a>
+                                 <td>{% if log.intent %}<a href="{% url 'panel:detail_chat_id' log.intent.name %}">{{log.intent.name}}</a>
                                     {% else%}
                                     intent не найден
                                     {%endif%}
