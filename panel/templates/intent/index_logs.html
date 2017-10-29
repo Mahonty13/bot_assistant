@@ -16,6 +16,7 @@
                             <th>Id</th>
                             <th>Сообщение</th>
                             <th>Intent</th>
+                            <th>Действие</th>
                             <th>Дата</th>
                             <th>Чат</th>
                         </tr>
@@ -30,6 +31,11 @@
                                  <td>{% if log.intent %}<a href="{% url 'panel:detail_intent' log.intent.name %}">{{log.intent.name}}</a>
                                     {% else%}
                                     intent не найден
+                                    {%endif%}
+                                </td>
+                                <td>
+                                    {% if not log.intent.name=="undefined" %}
+                                        <button type="submit" class="btn btn-success">Правильно</button>
                                     {%endif%}
                                 </td>
                                 <td>
