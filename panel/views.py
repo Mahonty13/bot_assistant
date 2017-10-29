@@ -6,6 +6,7 @@ from django.core.urlresolvers import reverse_lazy
 from .forms import IntentForm,Story_msgForm,Story_actionForm
 from handler.views import send
 import re
+import json,requests
 # Create your views here.
 class Index_intentsView(generic.ListView):
 	template_name="intent/index_intents.html"
@@ -132,3 +133,4 @@ def send_all(request):
 class IntentDelete(DeleteView):
 	model=Intent
 	success_url=reverse_lazy('panel:index_intents')
+

@@ -173,3 +173,21 @@ def bot_new(request):
             
 
     return HttpResponse(status=200)
+
+
+def browser_api(requests,message):
+    answer=assistant_body(1,message)
+    if 'text' in answer:
+        return HttpResponse(answer['text'])
+    if 'action' in answer:
+        try:
+            #тут вызывается action, assistant возвращает название функции, и функция вызывается через actions_story
+            #answer vars это variables нужный для ответа action
+            answer_vars=actions_story[answer['action']](answer['entities'])
+            print("answer_vars body :" + str(answer_vars))
+            #формируется готовый ответ
+            answer_to_user=answer['answer'].format(**answer_vars)
+            print("Answer:   " +  answer_to_user)
+            return HttpResponse(answer_to_user)
+        except:
+            return HttpResponse("Ваш запрос не удался")

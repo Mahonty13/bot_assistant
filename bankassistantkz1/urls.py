@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from handler.views import bot_new
+from handler.views import bot_new,browser_api
 import panel.urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^webhook/', bot_new),
     url(r'^paneladmin/', include(panel.urls))
+    url(r'^handler/(?P<message>.+)', browser_api)
+
 ]
