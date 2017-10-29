@@ -7,7 +7,7 @@
 {%block body %}
 
 
-		<h3> Диалог {{chat_id}} </h3>
+		<h3> Диалог {{chat_id}} <a class="btn btn-default" href="{% url 'panel:send_chat_id' chat_id.idnumber %}"><span class="glyphicon glyphicon-pencil"></span></a></h3>
 		<div class="panel panel-default">
                 <div class="panel-body">
 			<table class="table">
