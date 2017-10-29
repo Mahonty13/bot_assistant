@@ -129,20 +129,7 @@ def send_chat_id(request,pk):
     else:
         return render(request, 'intent/send_chat_id.html',{"chat_id":chat_id})
 
-def story_entity_add(request,pk):
-    intent = get_object_or_404(Intent, pk=pk)
-    if request.method == "POST":
-        form = Story_entityForm(request.POST)
-        updated_data = request.POST.copy()
-        updated_data.update({'name': form.data['name'].lower()})
-        form = Story_entityForm(data=updated_data)
-        if form.is_valid():
-            story_entity = form.save(commit=False)
-            story_entity.save()
-            return redirect('panel:story_entity_add', pk=intent.name)
-    else:
-        form = Story_entityForm()
-    return render(request, 'intent/story_entity_add.html', {'form': form})
+
 # class IntentCreate(CreateView):
 # 	model=Intent
 # 	template_name='intent/intent_form.html'
