@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import permission_required, login_required
 from wit import Wit
+from pydub import AudioSegment
 import json
 import requests
 from assistant_telegram1.views import assistant_body
