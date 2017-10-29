@@ -5,6 +5,7 @@ from assistant_telegram1.models import *
 from django.core.urlresolvers import reverse_lazy
 from .forms import IntentForm,Story_msgForm,Story_actionForm
 from handler.views import send
+import re
 # Create your views here.
 class Index_intentsView(generic.ListView):
 	template_name="intent/index_intents.html"
@@ -59,12 +60,21 @@ def intent_new(request):
     if request.method == "POST":
         form = IntentForm(request.POST)
         updated_data = request.POST.copy()
-        updated_data.update({'name': form.data['name'].lower()}) 
-        form = IntentForm(data=updated_data) 
-        if form.is_valid():
-            intent = form.save(commit=False)
-            intent.save()
-            return redirect('panel:detail_intent', pk=intent.name)
+        updated_data.update({'name': form.data['name'].lower()})
+        form = IntentForm(data=updated_data)
+        
+        try:
+            if form.is_valid():
+                if not re.match("\w+", form.data['name']):
+                    form = IntentForm()
+                    return render(request, 'intent/intent_edit.html', {'form': form}) 
+                else:
+                    intent = form.save(commit=False)
+                    intent.save()
+                    return redirect('panel:detail_intent', pk=intent.name)
+        except:
+            form = IntentForm()
+            return render(request, 'intent/intent_edit.html', {'form': form})
     else:
         form = IntentForm()
     return render(request, 'intent/intent_edit.html', {'form': form})
